@@ -1,0 +1,104 @@
+/* 整体页面布局与背景设置 */
+body {
+    background-color: #f4f4f4;
+    font-family: 'Arial', sans-serif; /* 添加字体 */
+}
+
+.content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 导航栏（Navbar）美化 */
+.navbar {
+    background: linear-gradient(to right, #66ccff, #0099cc);
+    border-bottom: 2px solid #333; /* 添加底部边框 */
+}
+
+.navbar-dark .navbar-brand,
+.navbar-dark .navbar-nav .nav-link {
+    color: white; /* 更改文本颜色 */
+}
+
+.navbar-toggler {
+    border-color: white; /* 更改边框颜色 */
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+/* 头部（Header）美化 */
+header h1 {
+    font-size: 48px;
+    color: #006699;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+}
+
+header p {
+    font-size: 20px;
+    color: #666;
+}
+
+header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/* 主体内容（Main Content）美化 */
+main h2 {
+    font-size: 36px;
+    color: #0099cc;
+    border-bottom: 2px solid #0099cc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+main h3 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+img.rounded-circle {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+img.rounded-circle:hover {
+    transform: scale(1.1);
+}
+
+.btn.btn-outline-primary {
+    border-width: 2px;
+    border-color: #0099cc;
+    color: #0099cc;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.btn.btn-outline-primary:hover {
+    background-color: #0099cc;
+    color: white;
+}
+
+/* 页脚（Footer）美化 */
+footer {
+    font-size: 16px;
+    padding: 10px 0;
+    background-color: #333; /* 更改背景颜色 */
+    color: white; /* 更改文本颜色 */
+}
+
+footer p {
+    margin-bottom: 0;
+}
+
+footer a {
+    margin-left: 10px;
+}
