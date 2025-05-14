@@ -1,51 +1,175 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<meta charset="UTF-8">
-<title>生日快乐！</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background-color: #ffebd7; /* 浅黄色背景 */
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  .card {
-    width: 300px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    overflow: hidden;
-    text-align: center;
-  }
-  .card img {
-    width: 100%;
-    height: auto;
-  }
-  .message {
-    padding: 20px;
-  }
-  h1 {
-    color: #f08080; /* 淡红色 */
-  }
-  p {
-    color: #555;
-  }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>给妈妈的生日祝福</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('img/imgs15.jpg') center/cover no-repeat;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            background: url('img/mom.jpg') center/cover no-repeat;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        h1 {
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeIn 2s;
+        }
+        .message {
+            font-size: 1.5em;
+            color: #fff;
+            margin: 20px 0;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        .heart {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: #ff5e62;
+            transform: rotate(45deg);
+            animation: float 4s infinite ease-in-out;
+        }
+        .heart:before, .heart:after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background: #ff5e62;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .heart:before {
+            top: -15px;
+            left: 0;
+        }
+        .heart:after {
+            top: 0;
+            left: -15px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes float {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(-20px); }
+        }
+        button {
+            background: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+    </style>
 </head>
 <body>
-<div class="card">
-  <img src="https://example.com/path/to/your/friend/photo.jpg" alt="生日快乐！">
-  <div class="message">
-    <h1>生日快乐！</h1>
-    <p>亲爱的[朋友的名字]：</p>
-    <p>在这特别的日子里，祝你拥有所有的快乐与美好。<br>愿这一年里充满爱、健康和成功。</p>
-    <p>from [你的名字]</p>
-  </div>
-</div>
+    <div class="container">
+        <h1>亲爱的妈妈，生日快乐！</h1>
+        <div class="message" id="birthdayMessage">
+            感谢您一直以来的爱与付出，愿您永远健康快乐！
+        </div>
+        <button id="changeMessage">换一条祝福</button>
+    </div>
+
+    <!-- 漂浮的心形装饰 -->
+    <div class="heart" style="top: 10%; left: 20%;"></div>
+    <div class="heart" style="top: 70%; left: 80%; animation-delay: 1s;"></div>
+    <div class="heart" style="top: 30%; left: 60%; animation-delay: 2s;"></div>
+    <div class="heart" style="top: 80%; left: 30%; animation-delay: 3s;"></div>
+
+    <!-- 背景音乐 -->
+    <audio id="bgMusic" loop>
+        <source src="img/flower.ogg" type="audio/ogg">
+    </audio>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 祝福语数组
+            const messages = [
+                "岁暮不辞丰茂，盛开不畏霜凋！",
+                "愿时光慢行，伴你明媚如初。愿岁月轻抚，许你安康依旧。",
+                "感谢您一直以来的爱与付出，愿您永远健康快乐！"
+            ];
+
+            const messageElement = document.getElementById('birthdayMessage');
+            const changeBtn = document.getElementById('changeMessage');
+            const bgMusic = document.getElementById('bgMusic');
+
+            // 点击按钮更换祝福语
+            changeBtn.addEventListener('click', function() {
+                const randomIndex = Math.floor(Math.random() * messages.length);
+                messageElement.textContent = messages[randomIndex];
+                
+                // 添加动画效果
+                messageElement.style.animation = 'none';
+                setTimeout(() => {
+                    messageElement.style.animation = 'fadeIn 1s';
+                }, 10);
+            });
+
+            // 页面加载后播放音乐
+            setTimeout(() => {
+                bgMusic.play().catch(e => {
+                    console.log('自动播放被阻止，请点击页面任意位置播放音乐');
+                });
+            }, 1000);
+
+            // 点击页面任意位置播放音乐
+            document.body.addEventListener('click', function() {
+                bgMusic.play();
+            });
+
+            // 创建更多漂浮的心形
+            for (let i = 0; i < 10; i++) {
+                createHeart();
+            }
+        });
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            
+            // 随机位置
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const delay = Math.random() * 5;
+            const duration = 3 + Math.random() * 3;
+            
+            heart.style.left = `${left}%`;
+            heart.style.top = `${top}%`;
+            heart.style.animation = `float ${duration}s infinite ease-in-out ${delay}s`;
+            
+            // 随机大小
+            const size = 20 + Math.random() * 30;
+            heart.style.width = `${size}px`;
+            heart.style.height = `${size}px`;
+            
+            document.body.appendChild(heart);
+        }
+    </script>
 </body>
 </html>
